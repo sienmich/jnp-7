@@ -44,6 +44,12 @@ main()
              width,
              height,
              polar_checker(10., 4, Colors::Caribbean_blue, Colors::blue));
+
+    create_BMP("polar_checker2.bmp",
+               width,
+               height,
+               polar_checker(10., 7, Colors::Caribbean_blue, Colors::blue));
+
   create_BMP("rings.bmp",
              width,
              height,
