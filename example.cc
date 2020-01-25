@@ -81,8 +81,10 @@ main()
 
   const auto h1 = [](auto a, auto b) { auto g = a * b; return g; };
   const auto h2 = [](auto a, auto b) { auto g = a + b; return g; };
+  const auto h3 = [](auto a, auto b, auto c) { auto g = a + b + c; return g; };
   const auto f1 = [](auto p) { auto a = p; return a; };
   const auto f2 = [](auto p) { auto b = p; return b; };
   assert(lift(h1, f1, f2)(42) == 42 * 42);
   assert(lift(h2, f1, f2)(42) == 42 + 42);
+  assert(lift(h3, f1, f1, f1)(42) == 3 * 42);
 }

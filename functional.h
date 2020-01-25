@@ -16,7 +16,7 @@ inline auto compose(auto f, auto ...g) {
 auto lift(auto h) {
     return [h]([[maybe_unused]] auto p) { return h(); };
 }
-
+/*
 auto lift(auto h, auto f) {
     return [h, f](auto p) {
         return h(f(p));
@@ -26,6 +26,12 @@ auto lift(auto h, auto f) {
 auto lift(auto h, auto f, auto g) {
     return [h, f, g](auto p) {
         return h(f(p), g(p));
+    };
+}
+*/
+auto lift(auto h, auto f1, auto ...f2) {
+    return [=](auto p) {
+        return lift([=](auto ...a2) { return h(f1(p), a2...); }, f2...)(p);
     };
 }
 
