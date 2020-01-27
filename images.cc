@@ -5,6 +5,18 @@ bool Detail::alternate(double x, double interval) {
     return (int) (x / interval) % 2;
 }
 
+Base_image<Point> Detail::scale(const Vector &v) {
+    return [=](const Point &p) {
+        return (Point(p.first / v.first, p.second / v.second, p.is_polar));
+    };
+}
+
+Base_image<Point> Detail::translate(const Vector &v) {
+    return [=](const Point &p) {
+        return (Point(p.first - v.first, p.second - v.second, p.is_polar));
+    };
+}
+
 Image cond(const Region &region, const Image &this_way, const Image &that_way) {
     return [=](const Point &p) {
         return region(p) ? this_way(p) : that_way(p);
