@@ -47,5 +47,3 @@ Image darken(const Image &image, const Blend &blend) {
 Image lighten(const Image &image, const Blend &blend) {
     return lerp(blend, image, constant(Colors::white));
 }
-
-
