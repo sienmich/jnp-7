@@ -117,12 +117,20 @@ Base_image<T> vertical_stripe(double d, T this_way, T that_way) {
     };
 }
 
+/// Returns an Image that for points inside region is like this_way, for the
+/// rest is like that_way.
 Image cond(const Region &region, const Image &this_way, const Image &that_way);
 
+/// Returns an Image that is a result of blending (with parameter blend)
+/// this_way and that_way.
 Image lerp(const Blend &blend, const Image &this_way, const Image &that_way);
 
+/// Returns an Image that is a result of blending (with parameter blend)
+/// image and black color.
 Image darken(const Image &image, const Blend &blend);
 
+/// Returns an Image that is a result of blending (with parameter blend)
+/// image and white color.
 Image lighten(const Image &image, const Blend &blend);
 
 #endif //IMAGES_H
