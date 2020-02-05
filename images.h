@@ -128,7 +128,8 @@ Base_image<T> vertical_stripe(double d, const T &this_way, const T &that_way) {
 
 /// Returns an Image that is a result of blending (with parameter blend)
 /// this_way and that_way.
-inline Image lerp(const Blend &blend, const Image &this_way, const Image &that_way) {
+inline Image
+lerp(const Blend &blend, const Image &this_way, const Image &that_way) {
     return [=](const Point p) {
         return this_way(p).weighted_mean(that_way(p), blend(p));
     };
@@ -136,7 +137,8 @@ inline Image lerp(const Blend &blend, const Image &this_way, const Image &that_w
 
 /// Returns an Image that for points inside region is like this_way, for the
 /// rest is like that_way.
-inline Image cond(const Region &region, const Image &this_way, const Image &that_way) {
+inline Image
+cond(const Region &region, const Image &this_way, const Image &that_way) {
     return lerp(region, this_way, that_way);
 }
 
@@ -151,4 +153,5 @@ inline Image darken(const Image &image, const Blend &blend) {
 inline Image lighten(const Image &image, const Blend &blend) {
     return lerp(blend, image, constant(Colors::white));
 }
+
 #endif //IMAGES_H
