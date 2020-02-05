@@ -30,9 +30,6 @@ namespace Detail {
     /// ... or [-3i, -2i) or [-i, 0) or [i, 2i) or [3i, 4i) or ... .
     bool alternate(double x, double interval);
 
-    /// Identity function that for every x returns x (any type).
-    static const auto Identity = compose();
-
     /// Returns a function that scales every point in x axis by v.first and
     /// in the y axis by v.second.
     Base_image<Point> scale(const Vector &v);
@@ -58,7 +55,7 @@ Base_image<T> translate(Base_image<T> image, Vector v) {
 template<typename T>
 Base_image<T> rotate(Base_image<T> image, double phi) {
     return compose(to_polar,
-                   translate<Point>(Detail::Identity, Vector(0, phi)),
+                   Detail::translate(Vector(0, phi)),
                    from_polar,
                    image);
 }
