@@ -103,7 +103,7 @@ template<typename T>
 Base_image<T>
 polar_checker(double d, int n, const T &this_way, const T &that_way) {
     return compose(to_polar,
-                   Detail::scale(Vector(d, 2.0 * M_PI / (double) n)),
+                   Detail::scale(Vector(d, 2 * M_PI / n)),
                    checker(1, this_way, that_way));
 }
 
