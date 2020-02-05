@@ -47,13 +47,13 @@ Base_image<T> constant(const T &t) {
 
 /// Translates whole image by Vector v.
 template<typename T>
-Base_image<T> translate(Base_image<T> image, Vector v) {
+Base_image<T> translate(const Base_image<T> &image, const Vector &v) {
     return compose(Detail::translate(v), image);
 }
 
 /// Rotates whole image by angle phi.
 template<typename T>
-Base_image<T> rotate(Base_image<T> image, double phi) {
+Base_image<T> rotate(const Base_image<T> &image, double phi) {
     return compose(to_polar,
                    Detail::translate(Vector(0, phi)),
                    from_polar,
@@ -62,15 +62,15 @@ Base_image<T> rotate(Base_image<T> image, double phi) {
 
 /// Scales whole image by s.
 template<typename T>
-Base_image<T> scale(Base_image<T> image, double s) {
+Base_image<T> scale(const Base_image<T> &image, double s) {
     return compose(Detail::scale(Vector(s, s)), image);
 }
 
 /// Returns function that for every point inside a circle(center: q, radius: r)
 /// returns inner; outer for other points.
 template<typename T>
-Base_image<T> circle(Point q, double r, T inner, T outer) {
-    return [=](const Point &p) {
+Base_image<T> circle(const Point &q, double r, const T &inner, const T &outer) {
+    return [=](const Point p) {
         return distance(p, q) <= r ? inner : outer;
     };
 }
@@ -78,8 +78,8 @@ Base_image<T> circle(Point q, double r, T inner, T outer) {
 /// Returns function that for every point inside a black field of a
 /// chessboard(field length: d) returns this_way; that_way for other points.
 template<typename T>
-Base_image<T> checker(double d, T this_way, T that_way) {
-    return [=](const Point &p) {
+Base_image<T> checker(double d, const T &this_way, const T &that_way) {
+    return [=](const Point p) {
         return Detail::alternate(p.first, d) == Detail::alternate(p.second, d)
                ? this_way : that_way;
     };
@@ -89,7 +89,8 @@ Base_image<T> checker(double d, T this_way, T that_way) {
 /// polar_chessboard(field length: d, rays: n) returns this_way;
 /// that_way for other points. See "polar_checker.bmp" for better explanation.
 template<typename T>
-Base_image<T> polar_checker(double d, int n, T this_way, T that_way) {
+Base_image<T>
+polar_checker(double d, int n, const T &this_way, const T &that_way) {
     return compose(to_polar,
                    Detail::scale(Vector(d, 2.0 * M_PI / (double) n)),
                    checker(1, this_way, that_way));
@@ -99,7 +100,7 @@ Base_image<T> polar_checker(double d, int n, T this_way, T that_way) {
 /// ring_pattern(center: q, one ring width: d) returns this_way;
 /// that_way for other points. See "rings.bmp" for better explanation.
 template<typename T>
-Base_image<T> rings(Point q, double d, T this_way, T that_way) {
+Base_image<T> rings(Point q, double d, const T &this_way, const T &that_way) {
     return compose(Detail::translate(Vector(q.first, q.second)),
                    polar_checker(d, 1, this_way, that_way));
 }
@@ -108,8 +109,8 @@ Base_image<T> rings(Point q, double d, T this_way, T that_way) {
 /// vertical stripe (center: (0, 0), width: d) returns this_way;
 /// that_way for other points.
 template<typename T>
-Base_image<T> vertical_stripe(double d, T this_way, T that_way) {
-    return [=](const Point &p) {
+Base_image<T> vertical_stripe(double d, const T &this_way, const T &that_way) {
+    return [=](const Point p) {
         return std::abs(p.first) * 2 <= d ? this_way : that_way;
     };
 }

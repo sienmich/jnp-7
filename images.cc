@@ -10,7 +10,7 @@ bool Detail::alternate(double x, double interval) {
 /// Returns a function that scales every point in x axis by v.first and
 /// in the y axis by v.second.
 Base_image<Point> Detail::scale(const Vector &v) {
-    return [=](const Point &p) {
+    return [=](const Point p) {
         return (Point(p.first / v.first, p.second / v.second, p.is_polar));
     };
 }
@@ -18,7 +18,7 @@ Base_image<Point> Detail::scale(const Vector &v) {
 /// Returns a function that moves every point in x axis by v.first and
 /// in the y axis by v.second.
 Base_image<Point> Detail::translate(const Vector &v) {
-    return [=](const Point &p) {
+    return [=](const Point p) {
         return (Point(p.first - v.first, p.second - v.second, p.is_polar));
     };
 }
@@ -31,7 +31,7 @@ Image cond(const Region &region, const Image &this_way, const Image &that_way) {
 /// Returns an Image that is a result of blending (with parameter blend)
 /// this_way and that_way.
 Image lerp(const Blend &blend, const Image &this_way, const Image &that_way) {
-    return [=](const Point &p) {
+    return [=](const Point p) {
         return this_way(p).weighted_mean(that_way(p), blend(p));
     };
 }
