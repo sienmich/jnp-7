@@ -81,15 +81,15 @@ cje opisane poniżej.
            uwaga  dotyczy  wszystkich  szablonów  funkcji oraz,  przez analogię
            w zakresie typu przyjmowanego, samych funkcji.
 
-    Base_image<T> rotate(Base_image<T> image, double phi) – obraca obraz bazowy
+    Base_image<T> rotate(Base_image<T> &image, double phi) – obraca obraz bazowy
     o kąt phi (wyrażony w radianach). Kierunek obrotu można określić na podsta-
     wie pliku rotate.bmp.
 
-    Base_image<T> translate(Base_image<T> image, Vector v) – przesuwa obraz ba-
+    Base_image<T> translate(Base_image<T> &image, Vector v) – przesuwa obraz ba-
     zowy o wektor v.  Kierunek przesunięcia  można określić  na podstawie pliku
     translate.bmp.
 
-    Base_image<T> scale(Base_image<T> image, double s) – skaluje  obraz  bazowy
+    Base_image<T> scale(Base_image<T> &image, double s) – skaluje  obraz  bazowy
     o wspołczynnik s.  Dla s == 2 otrzymuje się obraz bazowy dwukrotnie powięk-
     szony.
 

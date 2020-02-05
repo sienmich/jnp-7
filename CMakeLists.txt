@@ -19,7 +19,6 @@ add_executable(jnp_7
         coordinate.h
         functional.h
         images.h
-        images.cc
         example.cc
         )
 
